@@ -1,4 +1,1 @@
-const enable = document.getElementById("enable");
-const preview = document.getElementById("preview");
-
-console.log(enable, preview);
+const start=document.getElementById("start"),enable=document.getElementById("enable"),preview=document.getElementById("preview");chrome.storage.sync.get(["domSelectorAutoEnable","domSelectorShowPreview"],(function(e){e.domSelectorAutoEnable&&!0===e.domSelectorAutoEnable&&(enable.checked=!0),e.domSelectorShowPreview&&!0===e.domSelectorShowPreview&&(preview.checked=!0)})),start.addEventListener("click",(function(e){chrome.tabs.query({active:!0,currentWindow:!0},e=>{chrome.tabs.sendMessage(e[0].id,{start:"true"},()=>{}),window.close()})})),enable.addEventListener("change",(function(e){chrome.storage.sync.set({domSelectorAutoEnable:!!this.checked})})),preview.addEventListener("change",(function(e){chrome.storage.sync.set({domSelectorShowPreview:!!this.checked})}));
